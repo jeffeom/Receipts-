@@ -16,6 +16,10 @@
 		40D7487B1D416FE400347C53 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40D748791D416FE400347C53 /* LaunchScreen.storyboard */; };
 		40D748871D41735100347C53 /* AddNewReceiptsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D748861D41735100347C53 /* AddNewReceiptsViewController.m */; };
 		40D7488A1D4174FE00347C53 /* MyCustomCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D748891D4174FE00347C53 /* MyCustomCell.m */; };
+		40D748C61D418B0100347C53 /* Reciept+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D748C31D418B0100347C53 /* Reciept+CoreDataProperties.m */; };
+		40D748C71D418B0100347C53 /* Reciept.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D748C51D418B0100347C53 /* Reciept.m */; };
+		40D748CC1D418B0F00347C53 /* Tag+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D748C91D418B0F00347C53 /* Tag+CoreDataProperties.m */; };
+		40D748CD1D418B0F00347C53 /* Tag.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D748CB1D418B0F00347C53 /* Tag.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +38,14 @@
 		40D748861D41735100347C53 /* AddNewReceiptsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddNewReceiptsViewController.m; sourceTree = "<group>"; };
 		40D748881D4174FE00347C53 /* MyCustomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCustomCell.h; sourceTree = "<group>"; };
 		40D748891D4174FE00347C53 /* MyCustomCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCustomCell.m; sourceTree = "<group>"; };
+		40D748C21D418B0100347C53 /* Reciept+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Reciept+CoreDataProperties.h"; path = "../Reciept+CoreDataProperties.h"; sourceTree = "<group>"; };
+		40D748C31D418B0100347C53 /* Reciept+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Reciept+CoreDataProperties.m"; path = "../Reciept+CoreDataProperties.m"; sourceTree = "<group>"; };
+		40D748C41D418B0100347C53 /* Reciept.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reciept.h; path = ../Reciept.h; sourceTree = "<group>"; };
+		40D748C51D418B0100347C53 /* Reciept.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reciept.m; path = ../Reciept.m; sourceTree = "<group>"; };
+		40D748C81D418B0F00347C53 /* Tag+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Tag+CoreDataProperties.h"; path = "../Tag+CoreDataProperties.h"; sourceTree = "<group>"; };
+		40D748C91D418B0F00347C53 /* Tag+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Tag+CoreDataProperties.m"; path = "../Tag+CoreDataProperties.m"; sourceTree = "<group>"; };
+		40D748CA1D418B0F00347C53 /* Tag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tag.h; path = ../Tag.h; sourceTree = "<group>"; };
+		40D748CB1D418B0F00347C53 /* Tag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Tag.m; path = ../Tag.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,19 +78,10 @@
 		40D748671D416FE400347C53 /* Receipts++ */ = {
 			isa = PBXGroup;
 			children = (
-				40D7486B1D416FE400347C53 /* AppDelegate.h */,
-				40D7486C1D416FE400347C53 /* AppDelegate.m */,
-				40D7486E1D416FE400347C53 /* ViewController.h */,
-				40D7486F1D416FE400347C53 /* ViewController.m */,
-				40D748851D41735100347C53 /* AddNewReceiptsViewController.h */,
-				40D748861D41735100347C53 /* AddNewReceiptsViewController.m */,
-				40D748881D4174FE00347C53 /* MyCustomCell.h */,
-				40D748891D4174FE00347C53 /* MyCustomCell.m */,
-				40D748711D416FE400347C53 /* Main.storyboard */,
-				40D748771D416FE400347C53 /* Assets.xcassets */,
-				40D748791D416FE400347C53 /* LaunchScreen.storyboard */,
-				40D7487C1D416FE400347C53 /* Info.plist */,
-				40D748741D416FE400347C53 /* Receipts__.xcdatamodeld */,
+				40D7489A1D417A8B00347C53 /* UI */,
+				40D748981D417A6000347C53 /* View */,
+				40D748991D417A6000347C53 /* Model */,
+				40D748971D417A5F00347C53 /* Controller */,
 				40D748681D416FE400347C53 /* Supporting Files */,
 			);
 			path = "Receipts++";
@@ -90,6 +93,63 @@
 				40D748691D416FE400347C53 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		40D748971D417A5F00347C53 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				40D7486E1D416FE400347C53 /* ViewController.h */,
+				40D7486F1D416FE400347C53 /* ViewController.m */,
+				40D748851D41735100347C53 /* AddNewReceiptsViewController.h */,
+				40D748861D41735100347C53 /* AddNewReceiptsViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		40D748981D417A6000347C53 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				40D748881D4174FE00347C53 /* MyCustomCell.h */,
+				40D748891D4174FE00347C53 /* MyCustomCell.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		40D748991D417A6000347C53 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				40D7489B1D417AA600347C53 /* Objects */,
+				40D7486B1D416FE400347C53 /* AppDelegate.h */,
+				40D7486C1D416FE400347C53 /* AppDelegate.m */,
+				40D7487C1D416FE400347C53 /* Info.plist */,
+				40D748741D416FE400347C53 /* Receipts__.xcdatamodeld */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		40D7489A1D417A8B00347C53 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				40D748711D416FE400347C53 /* Main.storyboard */,
+				40D748771D416FE400347C53 /* Assets.xcassets */,
+				40D748791D416FE400347C53 /* LaunchScreen.storyboard */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		40D7489B1D417AA600347C53 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				40D748C21D418B0100347C53 /* Reciept+CoreDataProperties.h */,
+				40D748C31D418B0100347C53 /* Reciept+CoreDataProperties.m */,
+				40D748C41D418B0100347C53 /* Reciept.h */,
+				40D748C51D418B0100347C53 /* Reciept.m */,
+				40D748C81D418B0F00347C53 /* Tag+CoreDataProperties.h */,
+				40D748C91D418B0F00347C53 /* Tag+CoreDataProperties.m */,
+				40D748CA1D418B0F00347C53 /* Tag.h */,
+				40D748CB1D418B0F00347C53 /* Tag.m */,
+			);
+			name = Objects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -162,10 +222,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40D748CC1D418B0F00347C53 /* Tag+CoreDataProperties.m in Sources */,
+				40D748C71D418B0100347C53 /* Reciept.m in Sources */,
 				40D7488A1D4174FE00347C53 /* MyCustomCell.m in Sources */,
 				40D748871D41735100347C53 /* AddNewReceiptsViewController.m in Sources */,
+				40D748CD1D418B0F00347C53 /* Tag.m in Sources */,
 				40D748761D416FE400347C53 /* Receipts__.xcdatamodeld in Sources */,
 				40D748701D416FE400347C53 /* ViewController.m in Sources */,
+				40D748C61D418B0100347C53 /* Reciept+CoreDataProperties.m in Sources */,
 				40D7486D1D416FE400347C53 /* AppDelegate.m in Sources */,
 				40D7486A1D416FE400347C53 /* main.m in Sources */,
 			);

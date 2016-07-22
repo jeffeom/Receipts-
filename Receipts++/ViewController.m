@@ -7,8 +7,11 @@
 //
 
 #import "ViewController.h"
+#import "AddNewReceiptsViewController.h"
 
 @interface ViewController ()
+
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -17,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

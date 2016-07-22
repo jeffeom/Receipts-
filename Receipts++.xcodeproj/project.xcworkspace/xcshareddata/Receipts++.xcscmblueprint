@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "D4B953474DF396399D7D0C3E56F6A63CE565B21D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "D4B953474DF396399D7D0C3E56F6A63CE565B21D" : 0,
+    "198491D51858A14A51297DC31D2AE31251C02D6B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "9E56192C-9CB4-4475-AB43-5ED8D347C40A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "D4B953474DF396399D7D0C3E56F6A63CE565B21D" : "Receipts++\/",
+    "198491D51858A14A51297DC31D2AE31251C02D6B" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Receipts++",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Receipts++.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jeffeom\/obj_c.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "198491D51858A14A51297DC31D2AE31251C02D6B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/jeffeom\/Receipts-.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "D4B953474DF396399D7D0C3E56F6A63CE565B21D"
+    }
+  ]
+}
