@@ -7,11 +7,12 @@
 //
 
 #import "AddNewReceiptsViewController.h"
+#import "AppDelegate.h"
 
 @interface AddNewReceiptsViewController () <UITableViewDelegate, UITableViewDataSource>
 
-@property NSArray *myTagsArray;
-@property NSMutableArray *countSelectedTags;
+@property NSArray *objects;
+@property NSMutableArray *mySelectedTags;
 @property NSIndexPath *selectedIndexPath;
 
 @end
@@ -20,10 +21,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    self.context = appDelegate.managedObjectContext;
+    
+    [self fetchDataTag];
     // Do any additional setup after loading the view.
     self.tagTable = [[UITableView alloc] init];
-    self.myTagsArray = @[@"Family", @"Friends", @"Gas", @"Coffee"];
-    self.countSelectedTags = [NSMutableArray array];
+//    self.myTagsArray = @[@"Family", @"Friends", @"Gas", @"Coffee"];
+    self.mySelectedTags = [NSMutableArray array];
 
 }
 
@@ -33,11 +38,21 @@
     
     NSLog(@"Save Button is Pressed");
     
-    [self.delegate pressedButtonToSendAmountInput:[NSNumber numberWithInt: (int)[self.amountInput.text integerValue]] NoteInput:self.noteInput.text TimeInput:self.datePicker.date andTagTable:self.tagTable];
+    [self.delegate pressedButtonToSendAmountInput:[NSNumber numberWithInt: (int)[self.amountInput.text integerValue]] NoteInput:self.noteInput.text TimeInput:self.datePicker.date andTagArray:self.mySelectedTags];
     
     [self.navigationController popViewControllerAnimated:YES];
     
 }
+
+#pragma mark - Fetch Tag Data
+
+-(void)fetchDataTag {
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Tag"];
+    
+    NSError *error;
+    self.objects = [self.context executeFetchRequest:fetchRequest error:&error];
+}
+
 
 #pragma mark - TableView
 
@@ -46,13 +61,14 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.myTagsArray.count;
+    return self.objects.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    [self fetchDataTag];
     UITableViewCell *myCell = [tableView dequeueReusableCellWithIdentifier:@"TagCell" forIndexPath:indexPath];
-    
-    myCell.textLabel.text = self.myTagsArray[indexPath.row];
+    Tag *tag = self.objects[indexPath.row];
+    myCell.textLabel.text = tag.tagName;
     
     return myCell;
 }
@@ -63,24 +79,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath*)indexPath
 {
-    UITableViewCell *myCell = [tableView cellForRowAtIndexPath:indexPath];
-    
     if (self.selectedIndexPath && (indexPath == self.selectedIndexPath)) {
         
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
         [tableView cellForRowAtIndexPath:self.selectedIndexPath].accessoryType = UITableViewCellAccessoryNone;
-        NSNumber *row = [NSNumber numberWithInteger:myCell.tag];
-        [self.countSelectedTags removeObject:row];
+        [self.mySelectedTags removeObject:self.objects[indexPath.row]];
         self.selectedIndexPath = nil;
     }
     else {
         NSLog(@"cell is selected");
         self.selectedIndexPath = indexPath;
         [tableView cellForRowAtIndexPath:self.selectedIndexPath].accessoryType = UITableViewCellAccessoryCheckmark;
-        myCell.tag = indexPath.row;
-        NSNumber *row = [NSNumber numberWithInteger:myCell.tag];
-        [self.countSelectedTags addObject:row];
-        NSLog(@"this is my tag number: %ld", (long)myCell.tag);
+        [self.mySelectedTags addObject:self.objects[indexPath.row]];
+        NSLog(@"this is my tag: %@", [self.mySelectedTags componentsJoinedByString:@" "]);
     }
 }
 @end

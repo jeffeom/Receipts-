@@ -56,12 +56,23 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p70-4Z-qVN">
+                                                    <rect key="frame" x="270" y="37" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="rhF-N7-awS"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="lIW-is-GHE" firstAttribute="leading" secondItem="bRP-Bi-nZi" secondAttribute="leadingMargin" id="64l-cQ-zRE"/>
                                                 <constraint firstItem="jXi-rP-St0" firstAttribute="trailing" secondItem="bRP-Bi-nZi" secondAttribute="trailingMargin" id="877-xx-7dm"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="lIW-is-GHE" secondAttribute="bottom" id="JLw-a5-96o"/>
                                                 <constraint firstItem="jXi-rP-St0" firstAttribute="top" secondItem="bRP-Bi-nZi" secondAttribute="topMargin" id="OBo-fk-7G8"/>
+                                                <constraint firstItem="p70-4Z-qVN" firstAttribute="trailing" secondItem="bRP-Bi-nZi" secondAttribute="trailingMargin" id="TJf-Wo-pYF"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="p70-4Z-qVN" secondAttribute="bottom" constant="0.5" id="W1o-Sc-4wX"/>
                                                 <constraint firstItem="1a8-XX-6qw" firstAttribute="top" secondItem="bRP-Bi-nZi" secondAttribute="topMargin" id="YUr-GH-DZ2"/>
                                                 <constraint firstItem="1a8-XX-6qw" firstAttribute="leading" secondItem="bRP-Bi-nZi" secondAttribute="leadingMargin" id="gsZ-gO-ZF0"/>
                                             </constraints>
@@ -69,10 +80,15 @@
                                         <connections>
                                             <outlet property="amountLabel" destination="1a8-XX-6qw" id="5mP-rV-Gee"/>
                                             <outlet property="noteLabel" destination="lIW-is-GHE" id="Z3Y-yM-Og0"/>
+                                            <outlet property="tagLabel" destination="p70-4Z-qVN" id="VE2-7A-Ozl"/>
                                             <outlet property="timeLabel" destination="jXi-rP-St0" id="yxp-Fd-Uha"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="bcO-bm-3Yk"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="UeO-7q-gMu"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -86,7 +102,7 @@
                     <navigationItem key="navigationItem" title="Receipts" id="gQ5-7s-RhS">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Kfq-iw-v5J">
                             <connections>
-                                <segue destination="k23-ck-sO5" kind="show" identifier="addNew" id="rkv-op-ROR"/>
+                                <action selector="insertNewObject:" destination="BYZ-38-t0r" id="Xht-Yd-cuf"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -102,7 +118,7 @@
         <!--Add New Receipts View Controller-->
         <scene sceneID="itN-75-Bl8">
             <objects>
-                <viewController id="k23-ck-sO5" customClass="AddNewReceiptsViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="newView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="k23-ck-sO5" customClass="AddNewReceiptsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gPT-YY-XP1"/>
                         <viewControllerLayoutGuide type="bottom" id="6vH-sd-bKV"/>
@@ -112,7 +128,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="amount" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nyU-c0-8wp">
-                                <rect key="frame" x="36" y="185" width="248" height="30"/>
+                                <rect key="frame" x="36" y="141" width="248" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="GHJ-5o-F0m"/>
                                 </constraints>
@@ -120,7 +136,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="note" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SHo-3O-d6X">
-                                <rect key="frame" x="36" y="223" width="248" height="30"/>
+                                <rect key="frame" x="36" y="179" width="248" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="V0K-k6-qyo"/>
                                 </constraints>
@@ -140,7 +156,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add New Receipt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xyC-4D-t9Y">
-                                <rect key="frame" x="45" y="72" width="230" height="36"/>
+                                <rect key="frame" x="45" y="28" width="230" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="zA5-kr-DH9"/>
                                 </constraints>
@@ -198,7 +214,7 @@
                             <constraint firstItem="nyU-c0-8wp" firstAttribute="leading" secondItem="1Ak-Eb-Pli" secondAttribute="leadingMargin" constant="20" id="LN2-ee-Waq"/>
                             <constraint firstItem="xX8-ez-tnK" firstAttribute="centerX" secondItem="1Ak-Eb-Pli" secondAttribute="centerX" id="TWE-Km-jxI"/>
                             <constraint firstItem="SHo-3O-d6X" firstAttribute="top" secondItem="nyU-c0-8wp" secondAttribute="bottom" constant="8" id="Wds-0o-kKc"/>
-                            <constraint firstItem="xX8-ez-tnK" firstAttribute="top" secondItem="SHo-3O-d6X" secondAttribute="bottom" constant="5" id="aLk-PL-df0"/>
+                            <constraint firstItem="xX8-ez-tnK" firstAttribute="top" secondItem="SHo-3O-d6X" secondAttribute="bottom" constant="49" id="aLk-PL-df0"/>
                             <constraint firstAttribute="trailingMargin" secondItem="SHo-3O-d6X" secondAttribute="trailing" constant="20" id="h8V-hk-GMA"/>
                             <constraint firstItem="R9s-q9-ZyE" firstAttribute="leading" secondItem="1Ak-Eb-Pli" secondAttribute="leadingMargin" constant="117" id="ig4-4W-WCx"/>
                             <constraint firstItem="nyU-c0-8wp" firstAttribute="centerX" secondItem="1Ak-Eb-Pli" secondAttribute="centerX" id="iw3-mu-7bn"/>

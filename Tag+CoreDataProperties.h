@@ -16,7 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface Tag (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSString *tagName;
-@property (nullable, nonatomic, retain) Reciept *toManyReciepts;
+@property (nullable, nonatomic, retain) NSSet<Reciept *> *receipts;
+
+@end
+
+@interface Tag (CoreDataGeneratedAccessors)
+
+- (void)addReceiptsObject:(Reciept *)value;
+- (void)removeReceiptsObject:(Reciept *)value;
+- (void)addReceipts:(NSSet<Reciept *> *)values;
+- (void)removeReceipts:(NSSet<Reciept *> *)values;
 
 @end
 

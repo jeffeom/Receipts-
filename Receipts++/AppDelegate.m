@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "ViewController.h"
+#import "Reciept+CoreDataProperties.h"
+#import "Tag+CoreDataProperties.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +20,36 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    UINavigationController *nav = (UINavigationController *)self.window.rootViewController;
+    
+    ViewController *vc = [[nav viewControllers] firstObject];
+    
+    vc.context = self.managedObjectContext;
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+    {
+        Tag *tagFamily = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:vc.context];
+        tagFamily.tagName = @"Family";
+        
+        Tag *tagFriends = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:vc.context];
+        tagFriends.tagName = @"Friends";
+        
+        Tag *tagGas = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:vc.context];
+        tagGas.tagName = @"Gas";
+        
+        Tag *tagCoffee = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:vc.context];
+        tagCoffee.tagName = @"Coffee";
+        
+        NSError *error;
+        if (![vc.context save:&error]) {
+            NSLog(@"Error saving cd %@", error);
+        }
+        
+        NSLog(@"ran");
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     return YES;
 }
 

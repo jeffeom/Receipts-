@@ -13,12 +13,21 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Reciept (CoreDataProperties)
+@interface Receipt (CoreDataProperties)
 
 @property (nullable, nonatomic, retain) NSNumber *amount;
 @property (nullable, nonatomic, retain) NSString *note;
 @property (nullable, nonatomic, retain) NSDate *timeStamp;
-@property (nullable, nonatomic, retain) Tag *toManyTags;
+@property (nullable, nonatomic, retain) NSSet<Tag *> *tags;
+
+@end
+
+@interface Receipt (CoreDataGeneratedAccessors)
+
+- (void)addTagsObject:(Tag *)value;
+- (void)removeTagsObject:(Tag *)value;
+- (void)addTags:(NSSet<Tag *> *)values;
+- (void)removeTags:(NSSet<Tag *> *)values;
 
 @end
 

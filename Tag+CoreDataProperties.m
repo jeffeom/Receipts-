@@ -14,6 +14,6 @@
 @implementation Tag (CoreDataProperties)
 
 @dynamic tagName;
-@dynamic toManyReciepts;
+@dynamic receipts;
 
 @end

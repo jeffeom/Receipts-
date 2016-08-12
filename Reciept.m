@@ -9,7 +9,7 @@
 #import "Reciept.h"
 #import "Tag.h"
 
-@implementation Reciept
+@implementation Receipt
 
 // Insert code here to add functionality to your managed object subclass
 

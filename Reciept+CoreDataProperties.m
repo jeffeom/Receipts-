@@ -11,11 +11,11 @@
 
 #import "Reciept+CoreDataProperties.h"
 
-@implementation Reciept (CoreDataProperties)
+@implementation Receipt (CoreDataProperties)
 
 @dynamic amount;
 @dynamic note;
 @dynamic timeStamp;
-@dynamic toManyTags;
+@dynamic tags;
 
 @end
