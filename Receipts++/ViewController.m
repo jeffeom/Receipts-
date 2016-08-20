@@ -17,14 +17,8 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (weak, nonatomic) NSArray *objects;
-
-@property (weak, nonatomic) Tag* tagFamily;
-@property (weak, nonatomic) Tag* tagFriends;
-@property (weak, nonatomic) Tag* tagGas;
-@property (weak, nonatomic) Tag* tagCoffee;
-
-
+@property (strong, nonatomic) NSArray *objects;
+@property (strong, nonatomic) NSArray *tags;
 
 @end
 
@@ -51,7 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
+    [self fetchDataTags];
     [self fetchDataReceipt];
 }
 
@@ -71,11 +65,33 @@
     self.objects = [self.context executeFetchRequest:fetchRequest error:&error];
 }
 
+-(void)fetchDataTags {
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Tag"];
+    
+    NSError *error;
+    self.tags = [self.context executeFetchRequest:fetchRequest error:&error];
+}
+
 
 #pragma mark - Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return [self.objects count];
+}
+
+-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    return [self.tags count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
+    
+    NSMutableArray *tagNames = [NSMutableArray array];
+    
+    for (Tag *aTag in self.tags) {
+        [tagNames addObject:aTag.tagName];
+    }
+    
+    return tagNames[section];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -84,9 +100,12 @@
     
     Receipt *rec = self.objects[indexPath.row];
     
-    myCell.amountLabel.text = [NSString stringWithFormat:@"%@",rec.amount];
+    myCell.amountLabel.text = [NSString stringWithFormat:@"$%@",rec.amount];
     myCell.noteLabel.text = rec.note;
-    myCell.timeLabel.text = [NSString stringWithFormat:@"%@", rec.timeStamp];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"cccc, MMMM dd, hh:mm aa"];
+    NSString *prettyVersion = [dateFormat stringFromDate:rec.timeStamp];
+    myCell.timeLabel.text = [NSString stringWithFormat:@"%@", prettyVersion];
     
     NSArray *tags = rec.tags.allObjects;
     NSMutableArray *tagNames = [NSMutableArray array];
@@ -97,6 +116,8 @@
     
     return myCell;
 }
+
+
 
 - (IBAction)insertNewObject:(id)sender {
     
