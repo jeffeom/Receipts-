@@ -17,8 +17,15 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 
-@property (strong, nonatomic) NSArray *objects;
+@property (strong, nonatomic) NSArray *receipts;
 @property (strong, nonatomic) NSArray *tags;
+
+@property (strong, nonatomic) NSMutableArray *gas;
+@property (strong, nonatomic) NSMutableArray *coffee;
+@property (strong, nonatomic) NSMutableArray *family;
+@property (strong, nonatomic) NSMutableArray *friends;
+
+@property (strong, nonatomic) NSArray *organizedArray;
 
 @end
 
@@ -42,11 +49,22 @@
     }
 }
 
+#pragma mark - viewDidLoad, viewWillAppear
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    
+    self.gas = [NSMutableArray array];
+    self.coffee = [NSMutableArray array];
+    self.family = [NSMutableArray array];
+    self.friends = [NSMutableArray array];
+    
+    self.organizedArray = [NSArray array];
+    
     [self fetchDataTags];
     [self fetchDataReceipt];
+    [self reorganizeArray];
+    
 }
 
 
@@ -54,15 +72,17 @@
     [super viewWillAppear:animated];
     
     [self fetchDataReceipt];
+    [self reorganizeArray];
     [self.tableView reloadData];
 }
 
+#pragma mark - Fetch Data
 
 -(void)fetchDataReceipt {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Receipt"];
     
     NSError *error;
-    self.objects = [self.context executeFetchRequest:fetchRequest error:&error];
+    self.receipts = [self.context executeFetchRequest:fetchRequest error:&error];
 }
 
 -(void)fetchDataTags {
@@ -76,7 +96,7 @@
 #pragma mark - Table View
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return [self.objects count];
+    return [self.organizedArray[section] count];
 }
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -98,7 +118,8 @@
     
     MyCustomCell *myCell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     
-    Receipt *rec = self.objects[indexPath.row];
+    Receipt *rec = self.organizedArray[indexPath.section][indexPath.row];
+    NSArray *tags = rec.tags.allObjects;
     
     myCell.amountLabel.text = [NSString stringWithFormat:@"$%@",rec.amount];
     myCell.noteLabel.text = rec.note;
@@ -107,16 +128,10 @@
     NSString *prettyVersion = [dateFormat stringFromDate:rec.timeStamp];
     myCell.timeLabel.text = [NSString stringWithFormat:@"%@", prettyVersion];
     
-    NSArray *tags = rec.tags.allObjects;
-    NSMutableArray *tagNames = [NSMutableArray array];
-    for (Tag *tag in tags) {
-        [tagNames addObject:tag.tagName];
-    }
-    myCell.tagLabel.text = [NSString stringWithFormat:@"%@", [tagNames componentsJoinedByString:@" "]];
+    myCell.tagLabel.text = [self listTagNames:tags];
     
     return myCell;
 }
-
 
 
 - (IBAction)insertNewObject:(id)sender {
@@ -126,6 +141,50 @@
     addingPage.delegate = self;
     
     [self.navigationController pushViewController:addingPage animated:YES];
+}
+
+#pragma mark - Custom Methods
+
+- (NSString *)listTagNames:(NSArray *)tagArray{
+    
+    NSMutableArray *tagNames = [NSMutableArray array];
+    for (Tag *tag in tagArray) {
+        [tagNames addObject:tag.tagName];
+    }
+    
+    return [NSString stringWithFormat:@"%@", [tagNames componentsJoinedByString:@" "]];
+}
+
+- (void)reorganizeArray{
+    [self resetArrays];
+    [self createAnOrganizedArray];
+}
+
+-(void)createAnOrganizedArray{
+    for (Receipt *aReceipt in self.receipts) {
+        NSSet *tagSet = aReceipt.tags;
+        
+        for (Tag *aTag in tagSet) {
+            if ([aTag.tagName isEqualToString: @"Gas"]) {
+                [self.gas addObject:aReceipt];
+            }else if([aTag.tagName isEqualToString:@"Coffee"]){
+                [self.coffee addObject:aReceipt];
+            }else if ([aTag.tagName isEqualToString: @"Family"]){
+                [self.family addObject:aReceipt];
+            }else{
+                [self.friends addObject:aReceipt];
+            }
+        }
+    }
+    self.organizedArray = @[self.family, self.gas, self.friends, self.coffee];
+}
+
+-(void)resetArrays{
+    self.gas = [NSMutableArray array];
+    self.coffee = [NSMutableArray array];
+    self.family = [NSMutableArray array];
+    self.friends = [NSMutableArray array];
+    self.organizedArray = [NSArray array];
 }
 
 @end
